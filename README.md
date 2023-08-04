@@ -37,3 +37,4 @@ font-family: 'Borel', cursive;
 
 ##Wireframe
 ![layout wireframe](https://i.imgur.com/MwKXmD9.png)
+![layout wireframe](https://i.imgur.com/DWVtOU3.png)
