@@ -57,20 +57,26 @@ function handleChoice(evt) {
     if (awaitingEndOfRound) {
         return
     }
+    // grab attribute of the card clicked
     const animal = evt.target.getAttribute('data-animal')
-    console.log(animal)
+    // console.log(animal)
     evt.target.style.backgroundImage = `url(/imgs/${animal}.png)`
     evt.target.style.backgroundColor = 'white'
-    // set for the first click of each round 
+    // set for the first click of each round and return ro proceed with second click
     if (!activeCard) {
         activeCard = evt.target;
         return
-
-        
     }
-    awaitingEndOfRound = true
+    // set awaiting end of round to true
+    awaitingEndOfRound = true;
 
-    setTimeout()
+    // setTimeout to reset cards after the second click not matched with the first to end current round
+    setTimeout(() => {
+        evt.target.backgroundImage = null
+        evt.target.backgroundColor = 'lightgrey'
+        activeCard.backgroundImage = null
+        activeCard.backgroundColor = 'lightgrey'
+    }, 1000)
     // console.log('activeCard', activeCard)
 }
 // uncover the first card selected
@@ -84,5 +90,7 @@ function handleChoice(evt) {
 //card clicked
 gridEl.addEventListener('click', handleChoice)
 
+// console.log(totalAnimals)
 //reset game click
+// not working, when clicked all data-animal attributes show undefine
 // resetGameBtn.addEventListener('click', init)
