@@ -19,14 +19,14 @@ h2 {
     margin-top: 0;
     margin-bottom: 0.5vmin;
 }
-#grid {
+#board {
     border-color: black;
     display: grid;
     grid-template-columns: repeat(4, 18vmin);
     grid-template-rows: repeat(4, 18vmin);
 }
 
-#grid>div {
+#board>div {
     border: 0.2vmin solid lightgray;
     border-radius: 25px;
     margin: 1vmin;
