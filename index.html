@@ -3,11 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Borel&display=swap" rel="stylesheet">
     <script defer src="js/main.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <title>An Animal Memory Game</title>
 </head>
 <body>
     <h1>An Animal Memory Game</h1>
-    <p id="message">Let's begin!</p>
+    <h2 id="message">Let's begin!</h2>
+    <main id = 'grid'>
+        <!-- row 3 -->
+        <div id="c0r3"></div>
+        <div id="c1r3"></div>
+        <div id="c2r3"></div>
+        <div id="c3r3"></div>
+        <!-- row 2 -->
+        <div id="c0r2"></div>
+        <div id="c1r2"></div>
+        <div id="c2r2"></div>
+        <div id="c3r2"></div>
+        <!-- row 1 -->
+        <div id="c0r1"></div>
+        <div id="c1r1"></div>
+        <div id="c2r1"></div>
+        <div id="c3r1"></div>
+        <!-- row 0 -->
+        <div id="c0r0"></div>
+        <div id="c1r0"></div>
+        <div id="c2r0"></div>
+        <div id="c3r0"></div>
+    </main>
+    <footer>
+        <p>Wrong Guesses: <span id="wrongGuesses">0</span> / <span id="maxGuesses">3</span></p>
+        <button id="resetGame">Reset Game</button>
+    </footer>
 </body>
 </html>
