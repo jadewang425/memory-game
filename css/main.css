@@ -60,6 +60,6 @@ p {
     background-color: black;
 }
 
-.hidden {
-    background-color: lightgrey;
+.wrongGuessesMax {
+    color: red;
 }

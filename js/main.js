@@ -4,10 +4,10 @@ const boardEl = document.querySelector('#board')
 const messageEl = document.querySelector('h2');
 const cardEls = [...document.querySelectorAll('#board>div')]
 const resetGameBtn = document.querySelector('#resetGame')
+const wrongGuessesMsgEl = document.getElementById('wrongGuessesMsg')
 const wrongGuessesEl = document.getElementById('wrongGuesses')
-// console.log(wrongGuessesEl)
+const maxWrongGuessesEl = document.getElementById('maxWrongGuesses')
 const animals = ['cat', 'dog', 'mouse', 'goat', 'owl', 'elephant', 'eagle', 'rabbit']
-// const totalAnimals = [...animals, ...animals]
 
 // set variables
 let board 
@@ -34,6 +34,10 @@ function init () {
         0, 0, 0, 0, 
         0, 0, 0, 0 
     ]
+    // reset text color & board
+    messageEl.style.color = 'black'
+    wrongGuessesMsgEl.style.color = 'black'
+    
     // assigning cards with random animal options in the initial board
     for (i = 0; i < board.length; i++) {
         const cardEl = cardEls[i]
@@ -42,23 +46,16 @@ function init () {
         // new animal array to modify for the game without changing the original array
         const animal = totalAnimals[randomIdx]
         cardEl.setAttribute('data-animal', animal)
-        // reset game CSS if reset game button is clicked, is there a way to set it back to default
         cardEl.style.backgroundImage = `url(/imgs/${animal}.png)`
         cardEl.style.backgroundColor = 'white'
-        messageEl.style.color = 'black'
+        
         //take out the random index once picked
         totalAnimals.splice(randomIdx, 1)
     }
     // countdown before the cards are hidden
     startCountdown()
-    // render()
+    render()
 }
-
-
-// function render() {
-//     renderBoard()
-//     renderMessage()
-// }
 
 // countdown in the beginning
 function startCountdown () {
@@ -85,24 +82,37 @@ function startCountdown () {
     }, 1000)
 }
 
-function renderMessage() {
-    // update wrong guesses number
+function render() {
+//     renderBoard()
+    renderMessage()
 }
 
+function renderMessage() {
+    // update wrong guesses number
+    wrongGuessesEl.innerText = `${wrongGuesses}`
+    if (wrongGuesses === Number(maxWrongGuessesEl.innerText)) {
+    wrongGuessesMsgEl.style.color = 'red'
+    messageEl.style.color = 'red'
+    messageEl.innerText = 'Game Over'
+    return
+    }
+}
+
+
 function handleChoice(evt) {
-    //console.log('handleChoice, evt.target.id: ', evt.target.id)
-    // return if the round is not ended
+    // return if any timer is active
     if (activeTimer || 
         // or clicked outside of the cards
         evt.target.tagName !== 'DIV' ||
         // or clicked on the same card
-        evt.target === activeCard
+        evt.target === activeCard ||
+        // when max wrong guesses reached
+        wrongGuesses === Number(maxWrongGuessesEl.innerText)
         ) {
         return
     }
     // grab attribute of the card clicked
     const animal = evt.target.getAttribute('data-animal')
-    // console.log(animal)
     evt.target.style.backgroundImage = `url(/imgs/${animal}.png)`
     evt.target.style.backgroundColor = 'white'
     // set for the first click of each round and return ro proceed with second click
@@ -127,8 +137,10 @@ function handleChoice(evt) {
         return
     }
 
-    // set awaiting end of round to true
+    // set to true so the player cannot click on more cards before the current cards are covered
     activeTimer = true;
+    wrongGuesses += 1
+    console.log('wrongGuesses: ', wrongGuesses, ', maxWrongGuessesEl', maxWrongGuessesEl.innerText)
 
     // setTimeout to reset cards after the second click not matched with the first to end current round
     setTimeout(() => {
@@ -140,8 +152,8 @@ function handleChoice(evt) {
         activeTimer = false
         activeCard = null
     }, 1000)
-    // console.log('activeCard', activeCard)
-    // render()
+
+    render()
 }
 // uncover the first card selected
 // uncover the second card selected and check if matched

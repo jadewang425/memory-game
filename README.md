@@ -24,7 +24,7 @@ As a user, I want to...
  - after resetting the game, shuffle the cards randomly
  - add animal sounds and play when each set is complete
  - maybe to re-shuffle the cards when reset game button is pressed
- - once win, enlarge the reset game button
+ - once win, enlarge the reset game button/or animate the reset button to the middle
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
