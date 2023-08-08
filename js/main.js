@@ -7,8 +7,7 @@ const resetGameBtn = document.querySelector('#resetGame')
 const wrongGuessesEl = document.getElementById('wrongGuesses')
 // console.log(wrongGuessesEl)
 const animals = ['cat', 'dog', 'mouse', 'goat', 'owl', 'elephant', 'eagle', 'rabbit']
-const totalAnimals = [...animals, ...animals]
-const totalAnimalCount = totalAnimals.length
+// const totalAnimals = [...animals, ...animals]
 
 // set variables
 let board 
@@ -22,10 +21,11 @@ init()
 // initialize the game
 function init () {
     //setTomeout show all the images before covered
+    const totalAnimals = [...animals, ...animals]
     winner = null
     revealCount = 0
     wrongGuesses = 0
-    console.log('init wrongGuesses', wrongGuesses)
+    // console.log('init wrongGuesses', wrongGuesses)
     activeCard = null // set to the first event click in each round to compare with the second click
     activeTimer = true // wait for the countdown to complete before click
     board = [
@@ -54,7 +54,6 @@ function init () {
     // render()
 }
 
-console.log(totalAnimalCount)
 
 // function render() {
 //     renderBoard()
@@ -121,7 +120,7 @@ function handleChoice(evt) {
         messageEl.innerText = `You found the ${animal}s!`
         messageEl.style.color = 'green'
         // win if all animals are found
-        if (revealCount === totalAnimalCount) {
+        if (revealCount === (animals.length)*2) {
             messageEl.innerText = `You found all of the animals!`
             return
         }
@@ -155,7 +154,6 @@ function handleChoice(evt) {
 //card clicked
 boardEl.addEventListener('click', handleChoice)
 
-// console.log(totalAnimals)
 //reset game click
 // not working, when clicked all data-animal attributes show undefine
 resetGameBtn.addEventListener('click', init)
