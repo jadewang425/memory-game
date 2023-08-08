@@ -11,12 +11,12 @@ const totalAnimals = [...animals, ...animals]
 const totalAnimalCount = totalAnimals.length
 
 // set variables
-let board
+let board 
 let winner // true or false
 let revealCount // number os cards revealed to check win
 let wrongGuesses // count of the wrong guesses
 let activeCard //lookup for the second card clicked
-let awaitingEndOfRound // waiting 
+let activeTimer // if any timer is active 
 
 init()
 // initialize the game
@@ -24,10 +24,10 @@ function init () {
     //setTomeout show all the images before covered
     winner = null
     revealCount = 0
-    wrongGuesses = wrongGuessesEl.innerText
-    // console.log('init wrongGuesses', wrongGuesses)
+    wrongGuesses = 0
+    console.log('init wrongGuesses', wrongGuesses)
     activeCard = null // set to the first event click in each round to compare with the second click
-    awaitingEndOfRound = false // wait the round to end before the next click/new round
+    activeTimer = true // wait for the countdown to complete before click
     board = [
         0, 0, 0, 0,
         0, 0, 0, 0, 
@@ -39,6 +39,7 @@ function init () {
         const cardEl = cardEls[i]
         // pick a random index in the totalAnimals array to assign to a card
         const randomIdx = Math.floor(Math.random()*totalAnimals.length)
+        // new animal array to modify for the game without changing the original array
         const animal = totalAnimals[randomIdx]
         cardEl.setAttribute('data-animal', animal)
         // reset game CSS if reset game button is clicked, is there a way to set it back to default
@@ -58,17 +59,16 @@ console.log(totalAnimalCount)
 // function render() {
 //     renderBoard()
 //     renderMessage()
-//     renderCountdown()
 // }
 
-// count down 
+// countdown in the beginning
 function startCountdown () {
     let count = 5;
     messageEl.innerText = count;
     const timerId = setInterval(() => {
         count--
         if(count > 0) {
-            console.log('interval running', count)
+            // console.log('interval running', count)
             messageEl.innerText = count
             // disable click during countdown
             // cardEls.forEach((card) => {
@@ -80,17 +80,20 @@ function startCountdown () {
             cardEls.forEach((e) => {
             e.style.backgroundImage = null
             e.style.backgroundColor = 'lightgrey'
+            activeTimer = false
             })
         }
     }, 1000)
 }
 
-// function renderMessage() {}
+function renderMessage() {
+    // update wrong guesses number
+}
 
 function handleChoice(evt) {
     //console.log('handleChoice, evt.target.id: ', evt.target.id)
     // return if the round is not ended
-    if (awaitingEndOfRound || 
+    if (activeTimer || 
         // or clicked outside of the cards
         evt.target.tagName !== 'DIV' ||
         // or clicked on the same card
@@ -110,7 +113,7 @@ function handleChoice(evt) {
     }
     // if the second card match with the first
     if (animal === activeCard.getAttribute('data-animal')) {
-        awaitingEndOfRound = false
+        activeTimer = false
         activeCard = null
         revealCount += 2
         // console.log('revealCount', revealCount)
@@ -126,7 +129,7 @@ function handleChoice(evt) {
     }
 
     // set awaiting end of round to true
-    awaitingEndOfRound = true;
+    activeTimer = true;
 
     // setTimeout to reset cards after the second click not matched with the first to end current round
     setTimeout(() => {
@@ -135,7 +138,7 @@ function handleChoice(evt) {
         activeCard.style.backgroundImage = null
         activeCard.style.backgroundColor = 'lightgrey'
         // after clearing out the revealed cards
-        awaitingEndOfRound = false
+        activeTimer = false
         activeCard = null
     }, 1000)
     // console.log('activeCard', activeCard)
