@@ -20,9 +20,8 @@ let activeTimer // if any timer is active
 init()
 // initialize the game
 function init () {
-    //setTomeout show all the images before covered
     const totalAnimals = [...animals, ...animals]
-    winner = null
+    winner = false
     revealCount = 0
     wrongGuesses = 0
     // console.log('init wrongGuesses', wrongGuesses)
@@ -40,6 +39,7 @@ function init () {
     
     // assigning cards with random animal options in the initial board
     for (i = 0; i < board.length; i++) {
+        console.log(board)
         const cardEl = cardEls[i]
         // pick a random index in the totalAnimals array to assign to a card
         const randomIdx = Math.floor(Math.random()*totalAnimals.length)
@@ -54,7 +54,7 @@ function init () {
     }
     // countdown before the cards are hidden
     startCountdown()
-    render()
+    //render()
 }
 
 // countdown in the beginning
@@ -90,6 +90,10 @@ function render() {
 function renderMessage() {
     // update wrong guesses number
     wrongGuessesEl.innerText = `${wrongGuesses}`
+    if (winner) {
+        messageEl.innerText = `You found all of the animals!`
+        return
+    }
     if (wrongGuesses === Number(maxWrongGuessesEl.innerText)) {
     wrongGuessesMsgEl.style.color = 'red'
     messageEl.style.color = 'red'
@@ -107,40 +111,27 @@ function handleChoice(evt) {
         // or clicked on the same card
         evt.target === activeCard ||
         // when max wrong guesses reached
-        wrongGuesses === Number(maxWrongGuessesEl.innerText)
+        wrongGuesses === Number(maxWrongGuessesEl.innerText) ||
+        // if win
+        winner === true
         ) {
         return
-    }
+    } 
     // grab attribute of the card clicked
     const animal = evt.target.getAttribute('data-animal')
     evt.target.style.backgroundImage = `url(/imgs/${animal}.png)`
     evt.target.style.backgroundColor = 'white'
-    // set for the first click of each round and return ro proceed with second click
+    // if this if the first card click, set as active card then return to proceed with second click
     if (!activeCard) {
         activeCard = evt.target;
         return
     }
-    // if the second card match with the first
-    if (animal === activeCard.getAttribute('data-animal')) {
-        activeTimer = false
-        activeCard = null
-        revealCount += 2
-        // console.log('revealCount', revealCount)
-
-        messageEl.innerText = `You found the ${animal}s!`
-        messageEl.style.color = 'green'
-        // win if all animals are found
-        if (revealCount === (animals.length)*2) {
-            messageEl.innerText = `You found all of the animals!`
-            return
-        }
-        return
-    }
-
-    // set to true so the player cannot click on more cards before the current cards are covered
+    // if the second card doesn't match with the active card
+    
+    if (animal !== activeCard.getAttribute('data-animal')) {
+        // set to true so the player cannot click on more cards before the current cards are covered
     activeTimer = true;
     wrongGuesses += 1
-    console.log('wrongGuesses: ', wrongGuesses, ', maxWrongGuessesEl', maxWrongGuessesEl.innerText)
 
     // setTimeout to reset cards after the second click not matched with the first to end current round
     setTimeout(() => {
@@ -152,20 +143,26 @@ function handleChoice(evt) {
         activeTimer = false
         activeCard = null
     }, 1000)
+    } else {
+        // if the second card, check if match with the first card
+        activeTimer = false
+        activeCard = null
+        revealCount += 2
 
+        messageEl.innerText = `You found the ${animal}s!`
+        messageEl.style.color = 'green'
+    }
+    // win if all animals are found
+    if (revealCount === (animals.length)*2) {
+        winner = true
+    }
     render()
 }
-// uncover the first card selected
-// uncover the second card selected and check if matched
-    // if matched, update text in messageEl and
-//show gameover message once wrong guesses reached 3
 
 
 // eventListeners
-//console.log(boardEl)
 //card clicked
 boardEl.addEventListener('click', handleChoice)
 
-//reset game click
-// not working, when clicked all data-animal attributes show undefine
+//reset game button click
 resetGameBtn.addEventListener('click', init)

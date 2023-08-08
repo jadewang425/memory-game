@@ -23,7 +23,6 @@ As a user, I want to...
  - add flip card animation
  - after resetting the game, shuffle the cards randomly
  - add animal sounds and play when each set is complete
- - maybe to re-shuffle the cards when reset game button is pressed
  - once win, enlarge the reset game button/or animate the reset button to the middle
 
 ```html
