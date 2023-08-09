@@ -57,7 +57,8 @@ function init () {
     }
     // countdown before the cards are hidden
     startCountdown()
-    //render()
+    // render message
+    render()
 }
 
 // countdown in the beginning
@@ -127,7 +128,6 @@ function handleChoice(evt) {
         return
     }
     // if the second card doesn't match with the active card
-    
     if (animalAtt !== activeCard.getAttribute('data-animal')) {
         // set to true so the player cannot click on more cards before the current cards are covered
     activeTimer = true;
