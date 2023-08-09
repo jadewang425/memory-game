@@ -22,6 +22,7 @@ let activeTimer // if any timer is active
 init()
 // initialize the game
 function init () {
+    // 
     const totalAnimals = [...animals, ...animals]
     winner = false
     revealCount = 0
@@ -35,12 +36,12 @@ function init () {
         0, 0, 0, 0 
     ]
     // reset text color & board
-    messageEl.style.color = 'black'
-    wrongGuessesMsgEl.style.color = 'black'
+    messageEl.classList.remove('wrongGuessesMax')
+    wrongGuessesMsgEl.classList.remove('wrongGuessesMax')
     
     // assigning cards with random animal options in the initial board
     for (i = 0; i < board.length; i++) {
-        console.log(board)
+        // console.log(board)
         const cardEl = cardEls[i]
         // pick a random index in the totalAnimals array to assign to a card
         const randomIdx = Math.floor(Math.random()*totalAnimals.length)
@@ -88,12 +89,13 @@ function renderMessage() {
     wrongGuessesEl.innerText = `${wrongGuesses}`
     // winning message
     if (winner) {
+        messageEl.classList.add('foundAll')
         messageEl.innerText = `You found all of the animals!`
     }
     //if reaches max wrong guesses number, show game over message
     if (wrongGuesses === Number(maxWrongGuessesEl.innerText)) {
-    wrongGuessesMsgEl.style.color = 'red'
-    messageEl.style.color = 'red'
+    wrongGuessesMsgEl.classList.add('wrongGuessesMax')
+    messageEl.classList.add('wrongGuessesMax')
     messageEl.innerText = 'Game Over'
     }
 }
@@ -102,6 +104,7 @@ function renderMessage() {
 function handleChoice(evt) {
     // return if any timer is active
     const animal = evt.target
+    console.log(animal)
     if (activeTimer || 
         // or clicked outside of the cards
         animal.tagName !== 'DIV' ||
@@ -140,13 +143,12 @@ function handleChoice(evt) {
         activeCard = null
     }, 1000)
     } else {
-        // if the second card, check if match with the first card
+        // if the second card match with the first card
         activeTimer = false
         activeCard = null
         revealCount += 2
 
         messageEl.innerText = `You found the ${animalAtt}s!`
-        messageEl.style.color = 'green'
     }
     // win if all animals are found
     if (revealCount === (animals.length)*2) {
