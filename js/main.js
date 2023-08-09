@@ -48,7 +48,7 @@ function init () {
         // new animal array to modify for the game without changing the original array
         const animal = totalAnimals[randomIdx]
         cardEl.setAttribute('data-animal', animal)
-        cardEl.style.backgroundImage = `url(/imgs/${animal}.png)`
+        cardEl.style.backgroundImage = `url(./imgs/${animal}.png)`
         cardEl.style.backgroundColor = 'white'
         
         //take out the random index once picked
