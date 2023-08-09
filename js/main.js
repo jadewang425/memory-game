@@ -38,6 +38,7 @@ function init () {
     // reset text color & board
     messageEl.classList.remove('wrongGuessesMax')
     wrongGuessesMsgEl.classList.remove('wrongGuessesMax')
+    messageEl.classList.remove('foundAll')
     
     // assigning cards with random animal options in the initial board
     for (i = 0; i < board.length; i++) {
