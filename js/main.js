@@ -119,6 +119,7 @@ function handleChoice(evt) {
     // grab attribute of the card clicked
     const animalAtt = animal.getAttribute('data-animal')
     animal.style.backgroundImage = `url(./imgs/${animalAtt}.png)`
+    // update image url with .
     animal.style.backgroundColor = 'white'
     // if this if the first card click, set as active card then return to proceed with second click
     if (!activeCard) {
