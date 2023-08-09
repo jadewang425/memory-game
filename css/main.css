@@ -61,5 +61,8 @@ p {
 }
 
 .wrongGuessesMax {
-    color: red;
+    color: crimson;
+}
+.foundAll {
+    color: green;
 }
