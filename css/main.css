@@ -25,13 +25,39 @@ h2 {
     grid-template-columns: repeat(4, 18vmin);
     grid-template-rows: repeat(4, 18vmin);
 }
-
 .card {
+    height: 17vmin;
+    width: 17vmin;
     border: 0.2vmin solid lightgray;
     border-radius: 25px;
-    margin: 1vmin;
-    background-color: lightgray;
+    background-color: white;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease-in-out;
+}
+
+.cardFront, .cardBack {
+    position: absolute;
+    border: 0.2vmin solid lightgray;
+    border-radius: 25px;
+    height: 100%;
+    width: 100%;
     background-size: contain;
+    backface-visibility: hidden
+}
+
+.cardFront {
+    background-color: white;
+    transform: rotateY(180deg);
+    backface-visibility: hidden
+}
+
+.cardBack {
+    background-color: lightgray;
+}
+
+.flipcard {
+    transform: rotateY(180deg);
 }
 
 footer {

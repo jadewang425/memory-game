@@ -2,7 +2,7 @@
 // define constance
 const boardEl = document.querySelector('#board')
 const messageEl = document.querySelector('h2');
-const cardEls = [...document.querySelectorAll('#board>div')]
+const cardEls = [...document.querySelectorAll('#board>.cardFront')]
 const resetGameBtn = document.querySelector('#resetGame')
 const wrongGuessesMsgEl = document.getElementById('wrongGuessesMsg')
 const wrongGuessesEl = document.getElementById('wrongGuesses')
