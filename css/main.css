@@ -32,7 +32,7 @@ h2 {
     border-radius: 25px;
     position: relative;
     transform-style: preserve-3d;
-    transition: all 1s ease-in-out;
+    transition: 1s;
 }
 .card.flipped {
     transform: rotateY(-180deg);
