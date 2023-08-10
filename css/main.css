@@ -20,18 +20,43 @@ h2 {
     margin-bottom: 0.5vmin;
 }
 #board {
-    border-color: black;
     display: grid;
+    align-items: center;
     grid-template-columns: repeat(4, 18vmin);
     grid-template-rows: repeat(4, 18vmin);
 }
-
 .card {
+    justify-self: center;
+    height: 17vmin;
+    width: 17vmin;
+    border-radius: 25px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
+}
+.card.flipped {
+    transform: rotateY(-180deg);
+}
+
+.cardFront, .cardBack {
+    position: absolute;
     border: 0.2vmin solid lightgray;
     border-radius: 25px;
-    margin: 1vmin;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    backface-visibility: hidden
+}
+
+.card .cardFront {
+    background-color: white;
+    backface-visibility: hidden;
+}
+
+.card .cardBack {
     background-color: lightgray;
     background-size: contain;
+    transform: rotateY(180deg);
 }
 
 footer {
