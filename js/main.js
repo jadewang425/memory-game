@@ -40,6 +40,7 @@ function init () {
     messageEl.classList.remove('wrongGuessesMax')
     wrongGuessesMsgEl.classList.remove('wrongGuessesMax')
     messageEl.classList.remove('foundAll')
+    cardEls.forEach(card => card.classList.remove('flipped'))
     
     // assigning cards with random animal options in the initial board
     shuffleCards(totalAnimals)
@@ -126,7 +127,7 @@ function handleChoice(evt) {
 
     // grab attribute of the current and active card
     const currentCardAtt = currentCardP.getAttribute('data-animal')
-    const activeCardAtt = activeCard.parentElement.getAttribute('data-animal')
+    
     console.log(currentCardAtt)
     currentCardP.classList.remove('flipped');
 
@@ -136,7 +137,7 @@ function handleChoice(evt) {
         return
     }
     // if the second card doesn't match with the active card
-    if (currentCardAtt !== activeCardAtt) {
+    if (currentCardAtt !== activeCard.parentElement.getAttribute('data-animal')) {
         // set to true so the player cannot click on more cards before the current cards are covered
         activeTimer = true;
         wrongGuesses += 1
@@ -154,6 +155,8 @@ function handleChoice(evt) {
         activeTimer = false
         activeCard = null
         revealCount += 2
+
+        messageEl.innerText = `You found the ${currentCardAtt}s!`
     }
     // win if all animals are found
     if (revealCount === (animals.length)*2) {
