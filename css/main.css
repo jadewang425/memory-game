@@ -54,11 +54,10 @@ h2 {
 }
 
 .card .cardBack {
-    background-color: lightgrey;
+    background-color: lightgray;
+    background-size: contain;
     transform: rotateY(180deg);
 }
-
-
 
 footer {
     width: 70vmin;

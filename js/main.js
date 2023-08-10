@@ -94,7 +94,7 @@ function renderMessage() {
 function handleChoice(evt) {
     const currentCard = evt.target
     const currentCardP = currentCard.parentElement
-    console.log(currentCard)
+
     // return if any timer is active
     if (activeTimer ||
         // when max wrong guesses reached
@@ -133,7 +133,7 @@ function handleChoice(evt) {
         activeTimer = false
         activeCard = null
         revealCount += 2
-        
+
         messageEl.innerText = `You found the ${currentCardAtt}s!`
     }
     // win if all animals are found
