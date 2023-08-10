@@ -2,15 +2,15 @@
 // define constance
 const boardEl = document.querySelector('#board')
 const messageEl = document.querySelector('h2');
-const cardEls = [...document.querySelectorAll('#board>.cardFront')]
+const cardEls = [...document.querySelectorAll('.card')]
+const cardFrontEls = [...document.querySelectorAll('.cardFront')]
 const resetGameBtn = document.querySelector('#resetGame')
 const wrongGuessesMsgEl = document.getElementById('wrongGuessesMsg')
 const wrongGuessesEl = document.getElementById('wrongGuesses')
 const maxWrongGuessesEl = document.getElementById('maxWrongGuesses')
 const animals = ['cat', 'dog', 'mouse', 'goat', 'owl', 'elephant', 'eagle', 'rabbit']
-
 // test
-
+// console.log(cardEls)
 // set variables
 let board 
 let winner // true or false
@@ -41,24 +41,37 @@ function init () {
     messageEl.classList.remove('foundAll')
     
     // assigning cards with random animal options in the initial board
-    for (i = 0; i < board.length; i++) {
-        // console.log(board)
-        const cardEl = cardEls[i]
-        // pick a random index in the totalAnimals array to assign to a card
-        const randomIdx = Math.floor(Math.random()*totalAnimals.length)
-        // new animal array to modify for the game without changing the original array
-        const animal = totalAnimals[randomIdx]
-        cardEl.setAttribute('data-animal', animal)
-        cardEl.style.backgroundImage = `url(./imgs/${animal}.png)`
-        cardEl.style.backgroundColor = 'white'
+    shuffleCards(totalAnimals)
+    // for (i = 0; i < board.length; i++) {
+    //     const cardEl = cardEls[i]
+    //     // pick a random index in the totalAnimals array to assign to a card
+    //     const randomIdx = Math.floor(Math.random()*totalAnimals.length)
+    //     const animal = totalAnimals[randomIdx]
+    //     cardEl.setAttribute('data-animal', animal)
+    //     cardEl.style.backgroundImage = `url(./imgs/${animal}.png)`
+    //     // cardEl.style.backgroundColor = 'white'
         
-        //take out the random index once picked
-        totalAnimals.splice(randomIdx, 1)
-    }
+    //     //take out the random index once picked
+    //     totalAnimals.splice(randomIdx, 1)
+    // }
     // countdown before the cards are hidden
     startCountdown()
     // render message
     render()
+}
+// shuffle and assign cards
+function shuffleCards(arr) {
+    for (let i = 0; i < cardEls.length; i++) {
+        // pick a random index in the totalAnimals array to assign to a card
+        const randomIdx = Math.floor(Math.random()*arr.length)
+        const animal = arr[randomIdx]
+        console.log(cardEls.length)
+        cardEls[i].setAttribute('data-animal', animal)
+        //how to get image to assign to the card front?
+
+        //take out the random index once picked
+        arr.splice(randomIdx, 1)
+    }
 }
 
 // countdown in the beginning
@@ -73,8 +86,9 @@ function startCountdown () {
             clearInterval(timerId)
             messageEl.innerText = "Let's begin!"
             cardEls.forEach((e) => {
-            e.style.backgroundImage = null
-            e.style.backgroundColor = 'lightgrey'
+            // e.style.backgroundImage = null
+            // e.style.backgroundColor = 'lightgrey'
+            e.classList.add('flipped')
             activeTimer = false
             })
         }
@@ -120,8 +134,9 @@ function handleChoice(evt) {
 
     // grab attribute of the card clicked
     const animalAtt = animal.getAttribute('data-animal')
-    animal.style.backgroundImage = `url(./imgs/${animalAtt}.png)` // update image url with .
-    animal.style.backgroundColor = 'white'
+    animal.classList.add('flipped');
+    // animal.style.backgroundImage = `url(./imgs/${animalAtt}.png)` // update image url with .
+    // animal.style.backgroundColor = 'white'
     // if this if the first card click, set as active card then return to proceed with second click
     if (!activeCard) {
         activeCard = animal;

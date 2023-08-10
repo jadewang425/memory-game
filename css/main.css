@@ -30,10 +30,9 @@ h2 {
     width: 17vmin;
     border: 0.2vmin solid lightgray;
     border-radius: 25px;
-    background-color: white;
     position: relative;
     transform-style: preserve-3d;
-    transition: all 0.5s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
 .cardFront, .cardBack {
@@ -46,17 +45,17 @@ h2 {
     backface-visibility: hidden
 }
 
-.cardFront {
+.card .cardFront {
     background-color: white;
+    backface-visibility: hidden;
+}
+
+.card .cardBack {
+    background-color: lightgrey;
     transform: rotateY(180deg);
-    backface-visibility: hidden
 }
 
-.cardBack {
-    background-color: lightgray;
-}
-
-.flipcard {
+.card.flipped {
     transform: rotateY(180deg);
 }
 
