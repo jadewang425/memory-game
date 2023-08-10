@@ -53,7 +53,7 @@ function shuffleCards(arr) {
         const animal = arr[randomIdx]
         // create an attribute to assign animals
         cardEls[i].setAttribute('data-animal', animal)
-        cardFrontEls[i].style.backgroundImage = `url(./imgs/${animal}.png)`
+        cardFrontEls[i].style.backgroundImage = `url(./assets/${animal}.png)`
 
         //take out the random index once picked
         arr.splice(randomIdx, 1)
@@ -138,7 +138,8 @@ function handleChoice(evt) {
         activeTimer = false
         activeCard = null
         revealCount += 2
-
+        const sound =  new Audio(`./assets/${currentCardAtt}-audio.mp3`)
+        sound.play()
         messageEl.innerText = `You found the ${currentCardAtt}s!`
     }
     // win if all animals are found
