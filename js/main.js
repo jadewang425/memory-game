@@ -145,7 +145,8 @@ function handleChoice(evt) {
 
 
 // eventListeners
+
 //card clicked
 cardEls.forEach(card => card.addEventListener('click', handleChoice))
-//reset game button click
+//reset game button
 resetGameBtn.addEventListener('click', init)
