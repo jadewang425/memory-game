@@ -31,12 +31,17 @@ function init () {
     messageEl.classList.remove('wrongGuessesMax')
     wrongGuessesMsgEl.classList.remove('wrongGuessesMax')
     messageEl.classList.remove('foundAll')
-    cardEls.forEach(card => card.classList.remove('flipped'))
+    cardEls.forEach(card => card.classList.add('flipped'))
+
+    // 1 second for smooth transition to reveal the cards
+    setTimeout(() => {
+        cardEls.forEach(card => card.classList.remove('flipped'))
+        // assigning animals to cards randomly
+        shuffleCards(totalAnimals)
+        // 5 second countdown to memorize cards
+        startCountdown()
+    }, 1000)
     
-    // assigning animals to cards randomly
-    shuffleCards(totalAnimals)
-    // countdown before the cards are hidden
-    startCountdown()
     // render message
     renderMessage()
 }
@@ -71,7 +76,7 @@ function startCountdown () {
             activeTimer = false
             })
         }
-    }, 1000)
+    }, 1500)
 }
 
 function renderMessage() {
