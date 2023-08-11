@@ -11,7 +11,7 @@ As a user, I want to...
 - can only reveal 2 cards at a round
 - show a success message when a set of cards is paired
 - show an incorrect message if the second card doesn't match with the first, and hide the cards
-- lose after 3 times of incorrect guesses
+- lose after 5 times of incorrect guesses
 - show the cards that are paired cards
 - show a win message once all cards are guessed right
 - I want to be able to reset the game at any time

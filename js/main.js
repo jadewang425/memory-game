@@ -124,7 +124,7 @@ function handleChoice(evt) {
         // set to true so the player cannot click on more cards before the current cards are covered
         activeTimer = true;
         wrongGuesses += 1
-
+        messageEl.innerText = "Try again!"
         // setTimeout to reset cards after the second click not matched with the first to end current round
         setTimeout(() => {
             currentCardP.classList.add('flipped')
