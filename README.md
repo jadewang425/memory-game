@@ -1,9 +1,9 @@
-#AN ANIMAL MEMORY GAME
+# AN ANIMAL MEMORY GAME
 
 A simple game to help you improving your visual recognition! 
 
 
-###User Stories
+### User Stories
 As a user, I want to...
 - have a grid of 4 x 4
 - have 8 pairs of cards
@@ -25,20 +25,22 @@ As a user, I want to...
  - add animal sounds and play when each set is complete
  - once win, enlarge the reset game button/or animate the reset button to the middle
 
+###### HTML
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Borel&display=swap" rel="stylesheet">
 ```
+###### CSS
 ```css
 font-family: 'Amatic SC', cursive;
 font-family: 'Borel', cursive;
 ```
-####Technologies Used:
+#### Technologies Used:
  - HTML
  - CSS
  - JavaScript
 
-##Wireframe
+## Wireframe
 ![layout wireframe](https://i.imgur.com/MwKXmD9.png)
 ![layout wireframe](https://i.imgur.com/DWVtOU3.png)
